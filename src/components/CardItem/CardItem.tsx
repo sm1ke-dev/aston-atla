@@ -6,7 +6,11 @@ const CardItem = () => {
 
   return (
     <li className={`${styles.card} elements__card`}>
-      <img src="#" alt="#" className={styles.card__image} />
+      <img
+        src="https://vignette.wikia.nocookie.net/avatar/images/7/79/Pilot_-_Aang.png/revision/latest?cb=20120311133235"
+        alt="#"
+        className={styles.card__image}
+      />
       <div className={styles.card__infoWrapper}>
         <h2 className={styles.card__name}>Аанг</h2>
         <div className={styles.card__likeWrapper}>
