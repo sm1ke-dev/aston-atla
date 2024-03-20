@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import Header from "./components/Header/Header";
 import CardPage from "./pages/CardPage/CardPage";
 import Favorites from "./pages/Favorites/Favorites";
 import History from "./pages/History/History";
@@ -13,6 +14,7 @@ import SignUp from "./pages/SignUp/SignUp";
 function App() {
   return (
     <div className="page">
+      <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/card/:id" element={<CardPage />} />

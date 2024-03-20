@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 119px;
+  border-top: 1px solid #545454;
+  border-bottom: 1px solid #545454;
+
+  &__logo {
+    width: 150px;
+    cursor: pointer;
+  }
+
+  &__list {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__nav {
+    margin: 0;
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__exit {
+    color: #a9a9a9;
+  }
+}
