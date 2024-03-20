@@ -12,7 +12,7 @@ import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   return (
-    <div className="App">
+    <div className="page">
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/card/:id" element={<CardPage />} />
