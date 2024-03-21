@@ -1,10 +1,15 @@
 import React from "react";
+import styles from "./Search.module.scss";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import CardsList from "../../components/CardsList/CardsList";
 
 const Search = () => {
   return (
-    <div>
-      <h1>Поиск</h1>
-    </div>
+    <main className={styles.search}>
+      <SearchForm />
+      <h2 className={styles.search__notFound}>Ничего не найдено</h2>
+      {/* <CardsList /> */}
+    </main>
   );
 };
 
