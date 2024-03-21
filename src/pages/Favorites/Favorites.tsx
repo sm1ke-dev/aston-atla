@@ -6,11 +6,13 @@ const Favorites = () => {
   return (
     <main className={styles.favs}>
       <h2 className={styles.favs__title}>Избранное</h2>
-      {/* <h2 className={styles.favs__title}>Вы еще ничего не добавили в избранное</h2> */}
-      <ul className={styles.favs__list}>
+      <h2 className={styles.favs__title}>
+        Вы еще ничего не добавили в избранное
+      </h2>
+      {/* <ul className={styles.favs__list}>
         <CardItem />
         <CardItem />
-      </ul>
+      </ul> */}
     </main>
   );
 };

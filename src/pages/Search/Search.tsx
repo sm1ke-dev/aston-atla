@@ -8,11 +8,11 @@ const Search = () => {
     <main className={styles.search}>
       <SearchForm />
       <h2 className={styles.search__notFound}>Ничего не найдено</h2>
-      <ul className={styles.search__list}>
+      {/* <ul className={styles.search__list}>
         <CardItem />
         <CardItem />
         <CardItem />
-      </ul>
+      </ul> */}
     </main>
   );
 };
