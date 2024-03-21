@@ -1,0 +1,30 @@
+.notFound {
+  &__title {
+    margin: 200px 0 5px;
+    font-weight: normal;
+    text-align: center;
+    font-size: 140px;
+    line-height: normal;
+  }
+
+  &__subtitle {
+    margin: 0 0 184px;
+    text-align: center;
+    font-size: 16px;
+    line-height: normal;
+  }
+
+  &__link {
+    margin: 0;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
