@@ -1,14 +1,19 @@
 import React from "react";
 import styles from "./Main.module.scss";
-import CardsList from "../../components/CardsList/CardsList";
 import SearchForm from "../../components/SearchForm/SearchForm";
-import logo from "../../logo.svg";
+import CardItem from "../../components/CardItem/CardItem";
 
 const Main: React.FC = () => {
   return (
     <main className={styles.main}>
       <SearchForm />
-      <CardsList />
+      <ul className={styles.main__list}>
+        <CardItem />
+        <CardItem />
+        <CardItem />
+        <CardItem />
+        <CardItem />
+      </ul>
     </main>
   );
 };
