@@ -1,8 +1,19 @@
 import React from "react";
 import styles from "./Favorites.module.scss";
 import CardItem from "../../components/CardItem/CardItem";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
-const Favorites = () => {
+const Favorites: React.FC = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useAuth();
+
+  React.useEffect(() => {
+    if (!isAuth) {
+      navigate("/signin");
+    }
+  }, [isAuth]);
+
   return (
     <main className={styles.favs}>
       <h2 className={styles.favs__title}>Избранное</h2>

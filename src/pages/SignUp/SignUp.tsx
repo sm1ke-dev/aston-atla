@@ -2,13 +2,13 @@ import React from "react";
 import styles from "../../components/AuthForm/AuthForm.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../redux/slices/userSlice";
 import { auth } from "../../firebase";
+import { useAppDispatch } from "../../hooks/redux-hooks";
 
-const SignUp = () => {
-  const dispatch = useDispatch();
+const SignUp: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleRegister = (email: string, password: string) => {

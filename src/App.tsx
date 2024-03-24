@@ -1,7 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -16,9 +15,10 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import { removeUser, setUser } from "./redux/slices/userSlice";
 import Preloader from "./components/Preloader/Preloader";
+import { useAppDispatch } from "./hooks/redux-hooks";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -38,7 +38,11 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return <Preloader />;
+    return (
+      <div className="page__loader">
+        <Preloader />
+      </div>
+    );
   }
 
   return (

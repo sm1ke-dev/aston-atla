@@ -1,6 +1,13 @@
 .main {
   margin-bottom: 45px;
 
+  &__loader {
+    height: calc(100vh - 121px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__info {
     margin-top: 45px;
     font-weight: 900;

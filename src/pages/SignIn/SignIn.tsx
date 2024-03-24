@@ -1,13 +1,13 @@
 import React from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import { useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
+import { useAppDispatch } from "../../hooks/redux-hooks";
 
-const SignIn = () => {
-  const dispatch = useDispatch();
+const SignIn: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleLogin = (email: string, password: string) => {

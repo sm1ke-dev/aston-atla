@@ -16,3 +16,10 @@
   font-weight: 400;
   color: #fff;
 }
+
+.page__loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

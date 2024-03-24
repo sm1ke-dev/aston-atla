@@ -5,12 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { useDispatch } from "react-redux";
 import { removeUser } from "../../redux/slices/userSlice";
+import { useAppDispatch } from "../../hooks/redux-hooks";
 
-const Header = () => {
+const Header: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
 
   const handleLogout = () => {

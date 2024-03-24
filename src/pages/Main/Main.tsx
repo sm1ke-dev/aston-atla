@@ -3,12 +3,17 @@ import styles from "./Main.module.scss";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import CardItem from "../../components/CardItem/CardItem";
 import { useGetAllCharactersQuery } from "../../redux/atlaApi";
+import Preloader from "../../components/Preloader/Preloader";
 
 const Main: React.FC = () => {
   const { data: cards, isLoading, isError, error } = useGetAllCharactersQuery();
 
   if (isLoading) {
-    return <h2 className={styles.main__info}>Загрузка...</h2>;
+    return (
+      <div className={styles.main__loader}>
+        <Preloader />
+      </div>
+    );
   }
 
   if (isError) {
