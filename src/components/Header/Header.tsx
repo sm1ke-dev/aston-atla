@@ -2,9 +2,25 @@ import React from "react";
 import styles from "./Header.module.scss";
 import logo from "../../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../redux/slices/userSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuth } = useAuth();
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(removeUser());
+        console.log("Вы вышли из аккаунта");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <header className={styles.header}>
@@ -15,12 +31,32 @@ const Header = () => {
         onClick={() => navigate("/")}
       />
       <nav className={styles.header__list}>
-        <Link to="/signup" className={styles.header__nav}>
-          Регистрация
-        </Link>
-        <Link to="/signin" className={styles.header__nav}>
-          Вход
-        </Link>
+        {isAuth ? (
+          <>
+            <Link to="/favorites" className={styles.header__nav}>
+              Избранное
+            </Link>
+            <Link to="/history" className={styles.header__nav}>
+              История поиска
+            </Link>
+            <button
+              type="button"
+              className={styles.header__nav}
+              onClick={handleLogout}
+            >
+              Выйти
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/signup" className={styles.header__nav}>
+              Регистрация
+            </Link>
+            <Link to="/signin" className={styles.header__nav}>
+              Вход
+            </Link>
+          </>
+        )}
       </nav>
     </header>
   );
