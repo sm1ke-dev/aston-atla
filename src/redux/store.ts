@@ -10,3 +10,6 @@ export const store = configureStore({
   middleware: (getDefaultMiddlware) =>
     getDefaultMiddlware().concat(atlaApi.middleware),
 });
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
