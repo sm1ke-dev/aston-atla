@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { ICard } from "../../redux/atlaApi";
 import styles from "./CardItem.module.scss";
@@ -21,6 +21,7 @@ const CardItem: React.FC<ICardItemProps> = ({
 }) => {
   const { isAuth, favorites } = useAuth();
   const isLiked = favorites.find((el) => el._id === _id);
+  const [isHovered, setIsHovered] = React.useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -37,9 +38,21 @@ const CardItem: React.FC<ICardItemProps> = ({
 
   return (
     <li className={`${styles.card} elements__card`}>
-      <img src={photoUrl} alt={name} className={styles.card__image} />
+      <img
+        src={photoUrl}
+        alt={name}
+        className={`${styles.card__image} ${isHovered ? styles.card__image_hovered : ""}`}
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
+        onClick={() => navigate(`/card/${_id}`)}
+      />
       <div className={styles.card__infoWrapper}>
-        <h2 className={styles.card__name}>{name}</h2>
+        <h2
+          className={styles.card__name}
+          onClick={() => navigate(`/card/${_id}`)}
+        >
+          {name}
+        </h2>
         <div className={styles.card__likeWrapper}>
           <button
             type="button"

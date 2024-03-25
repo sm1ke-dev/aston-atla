@@ -8,7 +8,8 @@
   overflow: hidden;
   position: relative;
 
-  .card__image {
+  &__image {
+    z-index: 5;
     background-color: #000;
     color: #fff;
     width: 100%;
@@ -18,9 +19,16 @@
     object-fit: cover;
     object-position: center;
     cursor: pointer;
+    transition: ease 0.3s;
+
+    &_hovered {
+      transform: scale(1.1);
+    }
   }
 
-  .card__infoWrapper {
+  &__infoWrapper {
+    z-index: 10;
+    background-color: #fff;
     height: 79px;
     display: flex;
     align-items: center;
@@ -29,7 +37,7 @@
     padding: 0 21px 0;
   }
 
-  .card__name {
+  &__name {
     max-width: 190px;
     margin: 0;
     font-weight: 900;
@@ -38,9 +46,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
-  .card__likeButton {
+  &__likeButton {
     min-width: 22px;
     height: 19px;
     background-color: rgba(255, 255, 255, 0);
@@ -50,12 +64,12 @@
     cursor: pointer;
     transition: 0.3s;
 
+    &:hover {
+      opacity: 0.5;
+    }
+
     &_isActive {
       background-image: url(../../images/Vector_like_active.svg);
     }
-  }
-
-  .card__likeButton:hover {
-    opacity: 0.5;
   }
 }
