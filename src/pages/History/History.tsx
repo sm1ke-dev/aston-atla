@@ -1,28 +1,34 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import HistoryLink from "../../components/HistoryLink/HistoryLink";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./History.module.scss";
 
-const History: React.FC = () => {
+interface IHistoryProps {
+  handleRemoveHistory: (name: string) => void;
+}
+
+const History: React.FC<IHistoryProps> = ({ handleRemoveHistory }) => {
   const navigate = useNavigate();
-  const { isAuth } = useAuth();
+  const { isAuth, history } = useAuth();
 
   React.useEffect(() => {
     if (!isAuth) {
       navigate("/signin");
     }
-  }, [isAuth]);
+  }, [isAuth, navigate]);
 
   return (
     <main className={styles.history}>
       <h2 className={styles.history__title}>История поиска:</h2>
       <ul className={styles.history__list}>
-        <HistoryLink />
-        <HistoryLink />
-        <HistoryLink />
-        <HistoryLink />
-        <HistoryLink />
+        {history.map((el, i) => (
+          <HistoryLink
+            key={i}
+            name={el}
+            handleRemoveHistory={handleRemoveHistory}
+          />
+        ))}
       </ul>
     </main>
   );

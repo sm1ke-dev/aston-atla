@@ -2,7 +2,15 @@ import React from "react";
 import styles from "./HistoryLink.module.scss";
 import { Link } from "react-router-dom";
 
-const HistoryLink = () => {
+interface IHistoryLinkProps {
+  name: string;
+  handleRemoveHistory: (name: string) => void;
+}
+
+const HistoryLink: React.FC<IHistoryLinkProps> = ({
+  name,
+  handleRemoveHistory,
+}) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -11,11 +19,16 @@ const HistoryLink = () => {
       onMouseOver={() => setIsHovered(true)}
       onMouseOut={() => setIsHovered(false)}
     >
-      <Link to="/search" className={styles.item__link}>
-        Aang
+      <Link to={`/search/${name}`} className={styles.item__link}>
+        {name}
       </Link>
       {isHovered && (
-        <button className={styles.item__button}>
+        <button
+          className={styles.item__button}
+          onClick={() => {
+            handleRemoveHistory(name);
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
