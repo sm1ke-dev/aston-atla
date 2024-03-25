@@ -1,5 +1,5 @@
 import React from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { ICard } from "../../redux/atlaApi";
 import styles from "./CardItem.module.scss";
