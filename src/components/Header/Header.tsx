@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { removeUser } from "../../redux/slices/userSlice";
+import { removeFavorite, removeUser } from "../../redux/slices/userSlice";
 import { useAppDispatch } from "../../hooks/redux-hooks";
 
 const Header: React.FC = () => {
@@ -17,9 +17,9 @@ const Header: React.FC = () => {
     signOut(auth)
       .then(() => {
         dispatch(removeUser());
-        console.log("Вы вышли из аккаунта");
+        dispatch(removeFavorite());
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.code));
   };
 
   return (

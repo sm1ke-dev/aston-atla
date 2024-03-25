@@ -1,4 +1,13 @@
 .favs {
+  margin-bottom: 45px;
+
+  &__loader {
+    height: calc(100vh - 121px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__title {
     margin: 45px 0;
     font-weight: 900;

@@ -1,13 +1,39 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { ICard } from "../../redux/atlaApi";
 import styles from "./CardItem.module.scss";
 
 interface ICardItemProps {
   name: string;
   photoUrl: string;
+  _id: string;
+  handleAddFavorite?: (card: ICard) => void;
+  handleRemoveFavorite?: (card: ICard) => void;
 }
 
-const CardItem: React.FC<ICardItemProps> = ({ name, photoUrl }) => {
-  const [isLiked, setIsLiked] = React.useState(false);
+const CardItem: React.FC<ICardItemProps> = ({
+  name,
+  photoUrl,
+  _id,
+  handleAddFavorite,
+  handleRemoveFavorite,
+}) => {
+  const { isAuth, favorites } = useAuth();
+  const isLiked = favorites.find((el) => el._id === _id);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (isAuth) {
+      if (isLiked && handleRemoveFavorite) {
+        handleRemoveFavorite({ _id, name, photoUrl });
+      } else if (isLiked && handleAddFavorite) {
+        handleAddFavorite({ _id, name, photoUrl });
+      }
+    } else {
+      navigate("/signin");
+    }
+  };
 
   return (
     <li className={`${styles.card} elements__card`}>
@@ -21,7 +47,7 @@ const CardItem: React.FC<ICardItemProps> = ({ name, photoUrl }) => {
               isLiked ? styles.card__likeButton_isActive : ""
             }`}
             aria-label="Кнопка лайка карточки"
-            onClick={() => setIsLiked(!isLiked)}
+            onClick={handleClick}
           ></button>
         </div>
       </div>
