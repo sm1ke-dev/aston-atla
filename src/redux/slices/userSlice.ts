@@ -1,8 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  email: null,
-  id: null,
+interface IUserInitialState {
+  email: string;
+  id: string;
+  favorites: {
+    _id: string;
+    name: string;
+    photoUrl: string;
+  }[];
+}
+
+const initialState: IUserInitialState = {
+  email: "",
+  id: "",
+  favorites: [],
 };
 
 const userSlice = createSlice({
@@ -14,12 +25,19 @@ const userSlice = createSlice({
       state.id = action.payload.id;
     },
     removeUser(state) {
-      state.email = null;
-      state.id = null;
+      state.email = "";
+      state.id = "";
+    },
+    setFavorite(state, action) {
+      state.favorites = action.payload;
+    },
+    removeFavorite(state) {
+      state.favorites = [];
     },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, setFavorite, removeFavorite } =
+  userSlice.actions;
 
 export default userSlice.reducer;
