@@ -22,7 +22,7 @@ const SignUp: React.FC = () => {
         );
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.code));
   };
 
   return (

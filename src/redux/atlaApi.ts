@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface ICard {
+export interface ICard {
   _id: string;
   name: string;
   photoUrl: string;
