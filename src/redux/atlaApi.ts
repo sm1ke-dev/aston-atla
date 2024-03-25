@@ -23,7 +23,18 @@ export const atlaApi = createApi({
           };
         }),
     }),
+    searchCharacters: build.query<ICard[], string>({
+      query: (name) => `?name=${name}`,
+      transformResponse: (response: ICard[]) =>
+        response.map((card) => {
+          return {
+            _id: card._id,
+            name: card.name,
+            photoUrl: card.photoUrl,
+          };
+        }),
+    }),
   }),
 });
 
-export const { useGetAllCharactersQuery } = atlaApi;
+export const { useGetAllCharactersQuery, useSearchCharactersQuery } = atlaApi;
