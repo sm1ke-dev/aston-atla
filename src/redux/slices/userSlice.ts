@@ -8,12 +8,14 @@ interface IUserInitialState {
     name: string;
     photoUrl: string;
   }[];
+  history: string[];
 }
 
 const initialState: IUserInitialState = {
   email: "",
   id: "",
   favorites: [],
+  history: [],
 };
 
 const userSlice = createSlice({
@@ -34,10 +36,22 @@ const userSlice = createSlice({
     removeFavorite(state) {
       state.favorites = [];
     },
+    setHistory(state, action) {
+      state.history = action.payload;
+    },
+    removeHistory(state) {
+      state.history = [];
+    },
   },
 });
 
-export const { setUser, removeUser, setFavorite, removeFavorite } =
-  userSlice.actions;
+export const {
+  setUser,
+  removeUser,
+  setFavorite,
+  removeFavorite,
+  setHistory,
+  removeHistory,
+} = userSlice.actions;
 
 export default userSlice.reducer;
