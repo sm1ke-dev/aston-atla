@@ -8,11 +8,13 @@ import Preloader from "../../components/Preloader/Preloader";
 interface IMainProps {
   handleAddFavorite: (card: ICard) => void;
   handleRemoveFavorite: (card: ICard) => void;
+  handleAddHistory: (name: string) => void;
 }
 
 const Main: React.FC<IMainProps> = ({
   handleAddFavorite,
   handleRemoveFavorite,
+  handleAddHistory,
 }) => {
   const { data: cards, isLoading, isError } = useGetAllCharactersQuery();
 
@@ -30,7 +32,7 @@ const Main: React.FC<IMainProps> = ({
 
   return (
     <main className={styles.main}>
-      <SearchForm />
+      <SearchForm handleAddHistory={handleAddHistory} />
       <ul className={styles.main__list}>
         {cards?.map((card) => (
           <CardItem

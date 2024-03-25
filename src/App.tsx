@@ -18,6 +18,8 @@ import {
   setUser,
   setFavorite,
   removeFavorite,
+  setHistory,
+  removeHistory,
 } from "./redux/slices/userSlice";
 import Preloader from "./components/Preloader/Preloader";
 import { useAppDispatch } from "./hooks/redux-hooks";
@@ -28,8 +30,9 @@ import { ICard } from "./redux/atlaApi";
 function App() {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(true);
-  const { id: userId, favorites } = useAuth();
+  const { id: userId, favorites, history } = useAuth();
   const favoritesRef = ref(db, "user/" + userId + "/favorites");
+  const historyRef = ref(db, "user/" + userId + "/history");
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -40,6 +43,14 @@ function App() {
             dispatch(setFavorite(data.favorites));
           } else {
             dispatch(removeFavorite());
+          }
+        });
+        onValue(ref(db, "user/" + user.uid + "/history"), (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            dispatch(setHistory(data.history));
+          } else {
+            dispatch(removeHistory());
           }
         });
         dispatch(
@@ -67,6 +78,18 @@ function App() {
     }).catch((err) => alert(err.code));
   };
 
+  const handleAddHistory = (name: string) => {
+    set(historyRef, {
+      history: [...history, name],
+    }).catch((err) => alert(err.code));
+  };
+
+  const handleRemoveHistory = (name: string) => {
+    set(historyRef, {
+      history: history.filter((el) => el !== name),
+    }).catch((err) => alert(err.code));
+  };
+
   if (isLoading) {
     return (
       <div className="page__loader">
@@ -85,12 +108,25 @@ function App() {
             <Main
               handleAddFavorite={handleAddFavorite}
               handleRemoveFavorite={handleRemoveFavorite}
+              handleAddHistory={handleAddHistory}
             />
           }
         />
         <Route path="/card/:id" element={<CardPage />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/history" element={<History />} />
+        <Route
+          path="/search/:name"
+          element={
+            <Search
+              handleAddFavorite={handleAddFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
+              handleAddHistory={handleAddHistory}
+            />
+          }
+        />
+        <Route
+          path="/history"
+          element={<History handleRemoveHistory={handleRemoveHistory} />}
+        />
         <Route
           path="/favorites"
           element={<Favorites handleRemoveFavorite={handleRemoveFavorite} />}

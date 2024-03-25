@@ -27,7 +27,7 @@ const CardItem: React.FC<ICardItemProps> = ({
     if (isAuth) {
       if (isLiked && handleRemoveFavorite) {
         handleRemoveFavorite({ _id, name, photoUrl });
-      } else if (isLiked && handleAddFavorite) {
+      } else if (!isLiked && handleAddFavorite) {
         handleAddFavorite({ _id, name, photoUrl });
       }
     } else {
