@@ -21,6 +21,7 @@
   &__picWrapper {
     width: 400px;
     height: 500px;
+    position: relative;
   }
 
   &__pic {
@@ -28,6 +29,38 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+  }
+
+  &__likeWrapper {
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    width: 36px;
+    height: 36px;
+    background-color: #f9f9f9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__likeButton {
+    min-width: 22px;
+    height: 19px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    background-image: url(../../images/Vector-like.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &_isActive {
+      background-image: url(../../images/Vector_like_active.svg);
+    }
   }
 
   &__infoWrapper {
