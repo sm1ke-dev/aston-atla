@@ -16,12 +16,18 @@ const History: React.FC = () => {
 
   return (
     <main className={styles.history}>
-      <h2 className={styles.history__title}>История поиска:</h2>
-      <ul className={styles.history__list}>
-        {history.map((el, i) => (
-          <HistoryLink key={i} name={el} />
-        ))}
-      </ul>
+      {history.length == 0 ? (
+        <h2 className={styles.history__title}>Вы еще ничего не искали</h2>
+      ) : (
+        <>
+          <h2 className={styles.history__title}>История поиска:</h2>
+          <ul className={styles.history__list}>
+            {history.map((el, i) => (
+              <HistoryLink key={i} name={el} />
+            ))}
+          </ul>
+        </>
+      )}
     </main>
   );
 };
