@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# aston-atla
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Приложение для поиска персонажей из вселенной мультфильма "Аватар: легенда об Аанге"
+- Использованное API: [Last Airbender API](https://last-airbender-api.fly.dev/).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Основной функционал
 
-### `npm start`
+- Регистрация и авторизация пользователей;
+- Поиск персонажей;
+- Страницы с историей поиска и избранными карточками персонажей;
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Реализация требований
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1 уровень (обязательный - необходимый минимум)
 
-### `npm test`
+- [x] Реализованы Требования к функциональности.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### React
 
-### `npm run build`
+- [x] Пишем функциональные компоненты c хуками: [components](src/components), [pages](src/pages).
+- [x] Есть разделение на [умные](src/components/CardItem/CardItem.tsx) и [глупые](src/components/Preloader/Preloader.tsx) компоненты.
+- [x] Есть рендеринг [списков](src/pages/Main/Main.tsx).
+- [x] Реализована хотя бы одна [форма](src/components/AuthForm/AuthForm.tsx).
+- [x] Есть применение Контекст API: [ThemeContext](src/context/ThemeContext.tsx).
+- [x] Есть применение предохранителя: [ErrorBoundary](src/App.tsx).
+- [x] Есть хотя бы один кастомный хук: [useDebounce](src/hooks/useDebounce.ts) и [useAuth](src/hooks/useAuth.ts).
+- [x] Хотя бы несколько компонентов используют PropTypes: [HistoryLink](src/components/HistoryLink/HistoryLink.tsx), [CardItem](src/components/CardItem/CardItem.tsx).
+- [x] Есть применение [lazy + Suspense](src/App.tsx).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Redux
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [x] Используем Modern Redux with Redux Toolkit: [store](src/redux/store.ts).
+- [x] Используем слайсы: [userSliсe](src/redux/slices/userSlice.ts).
+- [x] Есть хотя бы одна кастомная мидлвара: [customMiddleware](src/redux/middleware/customMiddleware.ts).
+- [x] Используется RTK Query: [characters](src/redux/atlaApi.ts).
+- [x] Используется Transforming Responses: [getAllCharacters](src/redux/atlaApi.ts).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2 уровень (необязательный)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] Использование TypeScript.
+- [x] Использование Firebase для учетных записей пользователей, Избранного и Истории поиска.
