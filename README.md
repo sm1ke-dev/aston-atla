@@ -27,6 +27,7 @@
 - [x] Есть применение предохранителя: [ErrorBoundary](src/App.tsx).
 - [x] Есть хотя бы один кастомный хук: [useDebounce](src/hooks/useDebounce.ts) и [useAuth](src/hooks/useAuth.ts).
 - [x] Хотя бы несколько компонентов используют PropTypes: [HistoryLink](src/components/HistoryLink/HistoryLink.tsx), [CardItem](src/components/CardItem/CardItem.tsx).
+- [x] Поиск не должен триггерить много запросов к серверу [Search](src/components/SearchForm/SearchForm.tsx)
 - [x] Есть применение [lazy + Suspense](src/App.tsx).
 
 #### Redux
