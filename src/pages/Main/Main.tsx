@@ -34,14 +34,16 @@ const Main: React.FC<IMainProps> = ({
     <main className={styles.main}>
       <SearchForm handleAddHistory={handleAddHistory} />
       <ul className={styles.main__list}>
-        {cards?.map((card) => (
-          <CardItem
-            key={card._id}
-            {...card}
-            handleAddFavorite={handleAddFavorite}
-            handleRemoveFavorite={handleRemoveFavorite}
-          />
-        ))}
+        {cards &&
+          cards.map((card) => (
+            <CardItem
+              key={card._id}
+              {...card}
+              photoUrl={card.photoUrl ? card.photoUrl : ""}
+              handleAddFavorite={handleAddFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
+            />
+          ))}
       </ul>
     </main>
   );
