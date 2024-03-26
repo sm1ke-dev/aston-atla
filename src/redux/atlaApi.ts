@@ -18,7 +18,7 @@ export const atlaApi = createApi({
   endpoints: (build) => ({
     getAllCharacters: build.query<ICard[], void>({
       query: () => "/",
-      transformResponse: (response: ICard[]) =>
+      transformResponse: (response: ICard[]): ICard[] =>
         response.map((card) => {
           return {
             _id: card._id,
@@ -32,7 +32,7 @@ export const atlaApi = createApi({
     }),
     searchCharacters: build.query<ICard[], string>({
       query: (name) => `?name=${name}`,
-      transformResponse: (response: ICard[]) =>
+      transformResponse: (response: ICard[]): ICard[] =>
         response.map((card) => {
           return {
             _id: card._id,
