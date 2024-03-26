@@ -3,13 +3,8 @@ import styles from "./Favorites.module.scss";
 import CardItem from "../../components/CardItem/CardItem";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { ICard } from "../../redux/atlaApi";
 
-interface IFavoritesProps {
-  handleRemoveFavorite: (card: ICard) => void;
-}
-
-const Favorites: React.FC<IFavoritesProps> = ({ handleRemoveFavorite }) => {
+const Favorites: React.FC = () => {
   const navigate = useNavigate();
   const { isAuth, favorites } = useAuth();
 
@@ -30,11 +25,7 @@ const Favorites: React.FC<IFavoritesProps> = ({ handleRemoveFavorite }) => {
           <h2 className={styles.favs__title}>Избранное</h2>
           <ul className={styles.favs__list}>
             {favorites.map((card) => (
-              <CardItem
-                key={card._id}
-                {...card}
-                handleRemoveFavorite={handleRemoveFavorite}
-              />
+              <CardItem key={card._id} {...card} />
             ))}
           </ul>
         </>

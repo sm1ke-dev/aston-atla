@@ -2,20 +2,10 @@ import React from "react";
 import styles from "./Main.module.scss";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import CardItem from "../../components/CardItem/CardItem";
-import { ICard, useGetAllCharactersQuery } from "../../redux/atlaApi";
+import { useGetAllCharactersQuery } from "../../redux/atlaApi";
 import Preloader from "../../components/Preloader/Preloader";
 
-interface IMainProps {
-  handleAddFavorite: (card: ICard) => void;
-  handleRemoveFavorite: (card: ICard) => void;
-  handleAddHistory: (name: string) => void;
-}
-
-const Main: React.FC<IMainProps> = ({
-  handleAddFavorite,
-  handleRemoveFavorite,
-  handleAddHistory,
-}) => {
+const Main: React.FC = () => {
   const { data: cards, isLoading, isError } = useGetAllCharactersQuery();
 
   if (isLoading) {
@@ -32,7 +22,7 @@ const Main: React.FC<IMainProps> = ({
 
   return (
     <main className={styles.main}>
-      <SearchForm handleAddHistory={handleAddHistory} />
+      <SearchForm />
       <ul className={styles.main__list}>
         {cards &&
           cards.map((card) => (
@@ -40,8 +30,6 @@ const Main: React.FC<IMainProps> = ({
               key={card._id}
               {...card}
               photoUrl={card.photoUrl ? card.photoUrl : ""}
-              handleAddFavorite={handleAddFavorite}
-              handleRemoveFavorite={handleRemoveFavorite}
             />
           ))}
       </ul>

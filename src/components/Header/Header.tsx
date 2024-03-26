@@ -6,26 +6,14 @@ import darkIcon from "../../images/dark.png";
 import whiteIcon from "../../images/white.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
-import { removeFavorite, removeUser } from "../../redux/slices/userSlice";
-import { useAppDispatch } from "../../hooks/redux-hooks";
 import { useTheme } from "../../context/ThemeContext";
+import { useFirebase } from "../../hooks/useFirebase";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
   const { isWhite, toggleTheme } = useTheme();
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        dispatch(removeUser());
-        dispatch(removeFavorite());
-      })
-      .catch((err) => alert(err.code));
-  };
+  const { logOut } = useFirebase();
 
   return (
     <header
@@ -55,7 +43,7 @@ const Header: React.FC = () => {
             <button
               type="button"
               className={styles.header__nav}
-              onClick={handleLogout}
+              onClick={logOut}
             >
               Выйти
             </button>

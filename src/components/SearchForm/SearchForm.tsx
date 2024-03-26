@@ -5,22 +5,20 @@ import whiteSearchIcon from "../../images/search-icon-white.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useSearchCharactersQuery } from "../../redux/atlaApi";
 import { useDebounce } from "../../hooks/useDebounce";
+import { useFirebase } from "../../hooks/useFirebase";
 
 interface ISearchFormProps {
   inputValue?: string;
-  handleAddHistory: (name: string) => void;
 }
 
-const SearchForm: React.FC<ISearchFormProps> = ({
-  inputValue = "",
-  handleAddHistory,
-}) => {
+const SearchForm: React.FC<ISearchFormProps> = ({ inputValue = "" }) => {
   const [value, setValue] = React.useState(inputValue);
   const [isFocused, setIsFocused] = React.useState(false);
   const [isKeyPressed, setIsKeyPressed] = React.useState(false);
   const navigate = useNavigate();
   const debouncedValue = useDebounce(value, 300);
   const { data: characters } = useSearchCharactersQuery(debouncedValue);
+  const { addHistory } = useFirebase();
 
   React.useEffect(() => {
     if (value === "") {
@@ -46,7 +44,7 @@ const SearchForm: React.FC<ISearchFormProps> = ({
           onSubmit={(e) => {
             e.preventDefault();
             navigate(`/search/${value}`);
-            handleAddHistory(value);
+            addHistory(value);
           }}
         >
           <input

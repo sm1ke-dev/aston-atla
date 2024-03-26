@@ -2,17 +2,15 @@ import React from "react";
 import styles from "./HistoryLink.module.scss";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useFirebase } from "../../hooks/useFirebase";
 
 interface IHistoryLinkProps {
   name: string;
-  handleRemoveHistory: (name: string) => void;
 }
 
-const HistoryLink: React.FC<IHistoryLinkProps> = ({
-  name,
-  handleRemoveHistory,
-}) => {
+const HistoryLink: React.FC<IHistoryLinkProps> = ({ name }) => {
   const [isHovered, setIsHovered] = React.useState(false);
+  const { removeHistory } = useFirebase();
 
   return (
     <li
@@ -26,9 +24,7 @@ const HistoryLink: React.FC<IHistoryLinkProps> = ({
       {isHovered && (
         <button
           className={styles.item__button}
-          onClick={() => {
-            handleRemoveHistory(name);
-          }}
+          onClick={() => removeHistory(name)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +63,6 @@ const HistoryLink: React.FC<IHistoryLinkProps> = ({
 
 HistoryLink.propTypes = {
   name: PropTypes.string.isRequired,
-  handleRemoveHistory: PropTypes.func.isRequired,
 };
 
 export default HistoryLink;

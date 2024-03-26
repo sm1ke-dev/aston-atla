@@ -1,36 +1,29 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { ICard } from "../../redux/atlaApi";
 import styles from "./CardItem.module.scss";
 import PropTypes from "prop-types";
+import { useFirebase } from "../../hooks/useFirebase";
 
 interface ICardItemProps {
   name: string;
   photoUrl: string;
   _id: string;
-  handleAddFavorite?: (card: ICard) => void;
-  handleRemoveFavorite?: (card: ICard) => void;
 }
 
-const CardItem: React.FC<ICardItemProps> = ({
-  name,
-  photoUrl,
-  _id,
-  handleAddFavorite,
-  handleRemoveFavorite,
-}) => {
+const CardItem: React.FC<ICardItemProps> = ({ name, photoUrl, _id }) => {
   const { isAuth, favorites } = useAuth();
   const isLiked = favorites.find((el) => el._id === _id);
   const [isHovered, setIsHovered] = React.useState(false);
   const navigate = useNavigate();
+  const { addFavorite, removeFavorite } = useFirebase();
 
   const handleClick = () => {
     if (isAuth) {
-      if (isLiked && handleRemoveFavorite) {
-        handleRemoveFavorite({ _id, name, photoUrl });
-      } else if (!isLiked && handleAddFavorite) {
-        handleAddFavorite({ _id, name, photoUrl });
+      if (isLiked) {
+        removeFavorite({ _id, name, photoUrl });
+      } else {
+        addFavorite({ _id, name, photoUrl });
       }
     } else {
       navigate("/signin");
@@ -73,8 +66,6 @@ CardItem.propTypes = {
   name: PropTypes.string.isRequired,
   photoUrl: PropTypes.string.isRequired,
   _id: PropTypes.string.isRequired,
-  handleAddFavorite: PropTypes.func,
-  handleRemoveFavorite: PropTypes.func,
 };
 
 export default CardItem;

@@ -3,20 +3,10 @@ import styles from "./Search.module.scss";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import CardItem from "../../components/CardItem/CardItem";
 import { useParams } from "react-router-dom";
-import { ICard, useSearchCharactersQuery } from "../../redux/atlaApi";
+import { useSearchCharactersQuery } from "../../redux/atlaApi";
 import Preloader from "../../components/Preloader/Preloader";
 
-interface ISearchProps {
-  handleAddHistory: (name: string) => void;
-  handleAddFavorite: (card: ICard) => void;
-  handleRemoveFavorite: (card: ICard) => void;
-}
-
-const Search: React.FC<ISearchProps> = ({
-  handleAddHistory,
-  handleAddFavorite,
-  handleRemoveFavorite,
-}) => {
+const Search: React.FC = () => {
   const { name = "" } = useParams();
   const { data: cards, isLoading, isError } = useSearchCharactersQuery(name);
 
@@ -34,19 +24,12 @@ const Search: React.FC<ISearchProps> = ({
 
   return (
     <main className={styles.search}>
-      <SearchForm inputValue={name} handleAddHistory={handleAddHistory} />
+      <SearchForm inputValue={name} />
       {cards?.length == 0 ? (
         <h2 className={styles.search__notFound}>Ничего не найдено</h2>
       ) : (
         <ul className={styles.search__list}>
-          {cards?.map((card) => (
-            <CardItem
-              key={card._id}
-              {...card}
-              handleAddFavorite={handleAddFavorite}
-              handleRemoveFavorite={handleRemoveFavorite}
-            />
-          ))}
+          {cards?.map((card) => <CardItem key={card._id} {...card} />)}
         </ul>
       )}
     </main>
