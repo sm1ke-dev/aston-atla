@@ -6,6 +6,16 @@
   border-top: 1px solid #545454;
   border-bottom: 1px solid #545454;
 
+  &_white {
+    background-color: #f9f9f9;
+    border-radius: 9px;
+
+    a,
+    button {
+      color: #000;
+    }
+  }
+
   &__logo {
     width: 150px;
     cursor: pointer;
@@ -14,6 +24,13 @@
   &__list {
     display: flex;
     gap: 24px;
+  }
+
+  &__icon {
+    margin-top: -1px;
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
   }
 
   &__nav {

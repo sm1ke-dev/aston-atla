@@ -26,6 +26,7 @@ import { useAppDispatch } from "./hooks/redux-hooks";
 import { onValue, ref, set } from "firebase/database";
 import { useAuth } from "./hooks/useAuth";
 import { ICard } from "./redux/atlaApi";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -99,43 +100,45 @@ function App() {
   }
 
   return (
-    <div className="page">
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Main
-              handleAddFavorite={handleAddFavorite}
-              handleRemoveFavorite={handleRemoveFavorite}
-              handleAddHistory={handleAddHistory}
-            />
-          }
-        />
-        <Route path="/card/:id" element={<CardPage />} />
-        <Route
-          path="/search/:name"
-          element={
-            <Search
-              handleAddFavorite={handleAddFavorite}
-              handleRemoveFavorite={handleRemoveFavorite}
-              handleAddHistory={handleAddHistory}
-            />
-          }
-        />
-        <Route
-          path="/history"
-          element={<History handleRemoveHistory={handleRemoveHistory} />}
-        />
-        <Route
-          path="/favorites"
-          element={<Favorites handleRemoveFavorite={handleRemoveFavorite} />}
-        />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </div>
+    <ThemeProvider>
+      <div className="page">
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                handleAddFavorite={handleAddFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
+                handleAddHistory={handleAddHistory}
+              />
+            }
+          />
+          <Route path="/card/:id" element={<CardPage />} />
+          <Route
+            path="/search/:name"
+            element={
+              <Search
+                handleAddFavorite={handleAddFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
+                handleAddHistory={handleAddHistory}
+              />
+            }
+          />
+          <Route
+            path="/history"
+            element={<History handleRemoveHistory={handleRemoveHistory} />}
+          />
+          <Route
+            path="/favorites"
+            element={<Favorites handleRemoveFavorite={handleRemoveFavorite} />}
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 

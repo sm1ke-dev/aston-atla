@@ -1,17 +1,22 @@
 import React from "react";
 import styles from "./Header.module.scss";
 import logo from "../../images/logo.png";
+import whiteLogo from "../../images/ATLABLogo.webp";
+import darkIcon from "../../images/dark.png";
+import whiteIcon from "../../images/white.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { removeFavorite, removeUser } from "../../redux/slices/userSlice";
 import { useAppDispatch } from "../../hooks/redux-hooks";
+import { useTheme } from "../../context/ThemeContext";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
+  const { isWhite, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     signOut(auth)
@@ -23,14 +28,22 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${isWhite ? styles.header_white : ""}`}
+    >
       <img
-        src={logo}
+        src={isWhite ? whiteLogo : logo}
         alt="Лого"
         className={styles.header__logo}
         onClick={() => navigate("/")}
       />
       <nav className={styles.header__list}>
+        <img
+          className={styles.header__icon}
+          src={isWhite ? darkIcon : whiteIcon}
+          alt="dark icon"
+          onClick={toggleTheme}
+        />
         {isAuth ? (
           <>
             <Link to="/favorites" className={styles.header__nav}>
