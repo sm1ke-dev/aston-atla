@@ -58,7 +58,7 @@ export const useFirebase = () => {
       }
       setIsLoading(false);
     });
-  }, []);
+  }, [dispatch]);
 
   const addFavorite = (card: ICard) => {
     set(favoritesRef, {
