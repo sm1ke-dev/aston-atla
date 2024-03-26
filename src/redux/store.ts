@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
 import { atlaApi } from "./atlaApi";
-import customMiddleware from "./middleware/customMiddleware";
+import { loggerMiddleWare } from "./middleware/loggerMiddleware";
 
 export const store = configureStore({
   reducer: {
@@ -9,7 +9,10 @@ export const store = configureStore({
     [atlaApi.reducerPath]: atlaApi.reducer,
   },
   middleware: (getDefaultMiddlware) =>
-    getDefaultMiddlware().concat(atlaApi.middleware, customMiddleware),
+    getDefaultMiddlware().concat(
+      atlaApi.middleware,
+      loggerMiddleWare.middleware
+    ),
 });
 
 export type AppDispatch = typeof store.dispatch;
