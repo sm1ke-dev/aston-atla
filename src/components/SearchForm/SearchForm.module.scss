@@ -56,4 +56,29 @@
       opacity: 0.7;
     }
   }
+
+  &__suggestions {
+    list-style: none;
+    margin-top: -7px;
+    padding: 15px 0 10px 62px;
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+  }
+
+  &__suggestion {
+    margin-bottom: 15px;
+
+    a {
+      color: #000;
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid #000;
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 }
