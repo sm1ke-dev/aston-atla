@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./HistoryLink.module.scss";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 interface IHistoryLinkProps {
   name: string;
@@ -62,6 +63,11 @@ const HistoryLink: React.FC<IHistoryLinkProps> = ({
       )}
     </li>
   );
+};
+
+HistoryLink.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleRemoveHistory: PropTypes.func.isRequired,
 };
 
 export default HistoryLink;

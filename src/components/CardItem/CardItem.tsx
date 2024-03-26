@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { ICard } from "../../redux/atlaApi";
 import styles from "./CardItem.module.scss";
+import PropTypes from "prop-types";
 
 interface ICardItemProps {
   name: string;
@@ -66,6 +67,14 @@ const CardItem: React.FC<ICardItemProps> = ({
       </div>
     </li>
   );
+};
+
+CardItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  photoUrl: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
+  handleAddFavorite: PropTypes.func,
+  handleRemoveFavorite: PropTypes.func,
 };
 
 export default CardItem;
