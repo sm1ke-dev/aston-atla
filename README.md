@@ -25,7 +25,7 @@
 - [x] Реализована хотя бы одна [форма](src/components/AuthForm/AuthForm.tsx).
 - [x] Есть применение Контекст API: [ThemeContext](src/context/ThemeContext.tsx).
 - [x] Есть применение предохранителя: [ErrorBoundary](src/App.tsx).
-- [x] Есть хотя бы один кастомный хук: [useDebounce](src/hooks/useDebounce.ts) и [useAuth](src/hooks/useAuth.ts).
+- [x] Есть хотя бы один кастомный хук: [useDebounce](src/hooks/useDebounce.ts) и [useFirebase](src/hooks/useFirebase.tsx).
 - [x] Хотя бы несколько компонентов используют PropTypes: [HistoryLink](src/components/HistoryLink/HistoryLink.tsx), [CardItem](src/components/CardItem/CardItem.tsx).
 - [x] Поиск не должен триггерить много запросов к серверу [Search](src/components/SearchForm/SearchForm.tsx)
 - [x] Есть применение [lazy + Suspense](src/App.tsx).
