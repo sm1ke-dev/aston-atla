@@ -1,4 +1,11 @@
-import { ReactNode, useContext, createContext, useState, useMemo } from "react";
+import {
+  ReactNode,
+  useContext,
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 
 interface IThemeContext {
   isWhite: boolean;
@@ -24,9 +31,9 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }: IThemeProviderProps) => {
   const [isWhite, setIsWhite] = useState(false);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setIsWhite(!isWhite);
-  };
+  }, [isWhite]);
 
   const contextValue = useMemo(
     () => ({ isWhite, toggleTheme }),
