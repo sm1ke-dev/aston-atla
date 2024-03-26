@@ -1,0 +1,46 @@
+.card {
+  margin-top: 45px;
+  display: flex;
+  gap: 100px;
+
+  &__loader {
+    height: calc(100vh - 121px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__error {
+    margin-top: 45px;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
+
+  &__picWrapper {
+    width: 400px;
+    height: 500px;
+  }
+
+  &__pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  &__infoWrapper {
+    flex: 0 0 380px;
+  }
+
+  &__name,
+  &__info {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__name {
+    font-weight: normal;
+  }
+}
