@@ -1,18 +1,20 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Header from "./components/Header/Header";
 import { auth, db } from "./firebase";
-import CardPage from "./pages/CardPage/CardPage";
-import Favorites from "./pages/Favorites/Favorites";
-import History from "./pages/History/History";
-import Main from "./pages/Main/Main";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import Search from "./pages/Search/Search";
-import SignIn from "./pages/SignIn/SignIn";
-import SignUp from "./pages/SignUp/SignUp";
+
+const CardPage = lazy(() => import("./pages/CardPage/CardPage"));
+const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
+const History = lazy(() => import("./pages/History/History"));
+const Main = lazy(() => import("./pages/Main/Main"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound/PageNotFound"));
+const Search = lazy(() => import("./pages/Search/Search"));
+const SignIn = lazy(() => import("./pages/SignIn/SignIn"));
+const SignUp = lazy(() => import("./pages/SignUp/SignUp"));
+
 import {
   removeUser,
   setUser,
@@ -105,42 +107,50 @@ function App() {
       <ErrorBoundary fallback={<PageNotFound />}>
         <div className="page">
           <Header />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  handleAddFavorite={handleAddFavorite}
-                  handleRemoveFavorite={handleRemoveFavorite}
-                  handleAddHistory={handleAddHistory}
-                />
-              }
-            />
-            <Route path="/card/:id" element={<CardPage />} />
-            <Route
-              path="/search/:name"
-              element={
-                <Search
-                  handleAddFavorite={handleAddFavorite}
-                  handleRemoveFavorite={handleRemoveFavorite}
-                  handleAddHistory={handleAddHistory}
-                />
-              }
-            />
-            <Route
-              path="/history"
-              element={<History handleRemoveHistory={handleRemoveHistory} />}
-            />
-            <Route
-              path="/favorites"
-              element={
-                <Favorites handleRemoveFavorite={handleRemoveFavorite} />
-              }
-            />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          <Suspense
+            fallback={
+              <div className="page__loader">
+                <Preloader />
+              </div>
+            }
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    handleAddFavorite={handleAddFavorite}
+                    handleRemoveFavorite={handleRemoveFavorite}
+                    handleAddHistory={handleAddHistory}
+                  />
+                }
+              />
+              <Route path="/card/:id" element={<CardPage />} />
+              <Route
+                path="/search/:name"
+                element={
+                  <Search
+                    handleAddFavorite={handleAddFavorite}
+                    handleRemoveFavorite={handleRemoveFavorite}
+                    handleAddHistory={handleAddHistory}
+                  />
+                }
+              />
+              <Route
+                path="/history"
+                element={<History handleRemoveHistory={handleRemoveHistory} />}
+              />
+              <Route
+                path="/favorites"
+                element={
+                  <Favorites handleRemoveFavorite={handleRemoveFavorite} />
+                }
+              />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
         </div>
       </ErrorBoundary>
     </ThemeProvider>
