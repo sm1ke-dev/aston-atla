@@ -4,6 +4,10 @@ export interface ICard {
   _id: string;
   name: string;
   photoUrl: string;
+  gender?: string;
+  hair?: string;
+  profession?: string;
+  position?: string;
 }
 
 export const atlaApi = createApi({
@@ -23,6 +27,9 @@ export const atlaApi = createApi({
           };
         }),
     }),
+    getCharacterById: build.query<ICard, string>({
+      query: (id) => `/${id}`,
+    }),
     searchCharacters: build.query<ICard[], string>({
       query: (name) => `?name=${name}`,
       transformResponse: (response: ICard[]) =>
@@ -37,4 +44,8 @@ export const atlaApi = createApi({
   }),
 });
 
-export const { useGetAllCharactersQuery, useSearchCharactersQuery } = atlaApi;
+export const {
+  useGetAllCharactersQuery,
+  useGetCharacterByIdQuery,
+  useSearchCharactersQuery,
+} = atlaApi;
