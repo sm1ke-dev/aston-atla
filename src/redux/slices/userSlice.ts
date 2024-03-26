@@ -33,13 +33,13 @@ const userSlice = createSlice({
     setFavorite(state, action) {
       state.favorites = action.payload;
     },
-    removeFavorite(state) {
+    clearFavorite(state) {
       state.favorites = [];
     },
     setHistory(state, action) {
       state.history = action.payload;
     },
-    removeHistory(state) {
+    clearHistory(state) {
       state.history = [];
     },
   },
@@ -49,9 +49,9 @@ export const {
   setUser,
   removeUser,
   setFavorite,
-  removeFavorite,
+  clearFavorite,
   setHistory,
-  removeHistory,
+  clearHistory,
 } = userSlice.actions;
 
 export default userSlice.reducer;
